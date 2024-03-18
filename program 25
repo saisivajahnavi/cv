@@ -1,0 +1,17 @@
+import cv2
+import numpy as np
+a = cv2.imread(r"C:\Users\honey\Downloads\for22.png")
+Lap = np.array([[0, 1, 0],
+                [1, -4, 1],
+                [0, 1, 0]])
+a1 = cv2.filter2D(a, -1, Lap)
+a2 = np.uint8(a1)
+cv2.imshow("Laplacian Difference", np.abs(a - a2))
+lap = np.array([[-1, -1, -1],
+                [-1, 8, -1],
+                [-1, -1, -1]])
+a3 = cv2.filter2D(a, -1, lap)
+a4 = np.uint8(a3)
+cv2.imshow("Laplacian Sum", np.abs(a + a4))
+cv2.waitKey(0)
+cv2.destroyAllWindows()
