@@ -1,0 +1,16 @@
+import cv2
+import numpy as np
+def sharpen_high_boost(image, boost_factor=1.5, kernel_size=(3, 3), sigma=1):
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    blurred = cv2.GaussianBlur(gray, kernel_size, sigma)
+    high_boost_mask = gray - blurred
+    sharpened = gray + boost_factor * high_boost_mask
+    sharpened = np.clip(sharpened, 0, 255)
+    sharpened = sharpened.astype(np.uint8)
+    return sharpened
+image = cv2.imread(r"C:\Users\honey\Downloads\for22.png")
+sharpened_image = sharpen_high_boost(image)
+cv2.imshow('Original Image', image)
+cv2.imshow('Sharpened Image', sharpened_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
